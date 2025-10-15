@@ -1,0 +1,11 @@
+from pathlib import Path
+
+name_map = {
+    "Tennote":"₹10","Twentynote":"₹20","Fiftynote":"₹50",
+    "1Hundrednote":"₹100","2Hundrednote":"₹200",
+    "5Hundrednote":"₹500","2Thousandnote":"₹2000",
+}
+classes = sorted([p.name for p in Path("data/splits/train").iterdir() if p.is_dir()])
+labels = [name_map.get(c,c) for c in classes]
+Path("labels.txt").write_text("\n".join(labels), encoding="utf-8")
+print("labels.txt ->", labels)
